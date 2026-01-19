@@ -1,0 +1,2 @@
+# MENTAL-HEALTH-COMPANION
+To develop an intelligent Mental Health Companion Chatbot that acts as a virtual friend, providing empathetic, real-time conversational support to help users manage stress, anxiety, and emotional distress through accessible, stigma-free interactions.
