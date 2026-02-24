@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MindSphere</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<h1 class="title">MindSphere 🌌</h1>
+<p class="subtitle">A calm digital space for your thoughts</p>
+
+<!-- Mood Orb -->
+<div class="orb-container">
+    <div id="orb"></div>
+    <select id="mood" onchange="changeMood()">
+        <option value="">How are you feeling?</option>
+        <option value="happy">😊 Happy</option>
+        <option value="sad">😔 Sad</option>
+        <option value="anxious">😟 Anxious</option>
+        <option value="stressed">😫 Stressed</option>
+        <option value="calm">😌 Calm</option>
+    </select>
+</div>
+
+<!-- Feature Cards -->
+<div class="cards">
+    <div class="card">
+        <h3>🌿 Affirmation</h3>
+        <p id="affirmation">Tap the button for positivity</p>
+        <button onclick="newAffirmation()">New Affirmation</button>
+    </div>
+
+    <div class="card">
+        <h3>🫁 Breathing Exercise</h3>
+        <p id="breathingText">Ready to relax?</p>
+        <button onclick="startBreathing()">Start Breathing</button>
+    </div>
+</div>
+
+<!-- Chat Dock -->
+<div class="chat-dock">
+    <div class="chat-header">
+        <span>💬 MindSphere Chat</span>
+        <small>Safe • Private • Judgment-free</small>
+    </div>
+
+    <div id="chat-box">
+        <div class="bot-msg">
+            Hey 🤍 I’m here with you.  
+            You can talk freely.
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type what's on your mind...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<footer>
+    <div>
+        ⚠ Minor Project - Prototype
+    </div>
+    <div style="width: fit-content; margin: 0 auto;">
+        <ul>
+            <li>Aditya</li>
+            <li>Bhavya</li>
+            <li>Manas</li>
+            <li>Divyansh</li>
+            <li>Tanish</li>
+            <li>Tushant</li>
+        </ul>
+    </div>
+</footer>
+
+<script src="index.js"></script>
+</body>
+</html>
