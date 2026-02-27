@@ -5,12 +5,14 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Save message to DB
-def log_message(user_msg, bot_msg):
-    conn = sqlite3.connect('database.db')
+# Save conversation to database
+def log_message(user_msg, bot_msg, sentiment):
+    conn = sqlite3.connect("database.db")
     c = conn.cursor()
-    c.execute("INSERT INTO messages (user_msg, bot_msg, timestamp) VALUES (?, ?, ?)", 
-              (user_msg, bot_msg, datetime.now()))
+    c.execute(
+        "INSERT INTO messages (user_msg, bot_msg, sentiment, timestamp) VALUES (?, ?, ?, ?)",
+        (user_msg, bot_msg, sentiment, datetime.now())
+    )
     conn.commit()
     conn.close()
 
@@ -20,10 +22,14 @@ def home():
 
 @app.route("/get_response", methods=["POST"])
 def get_response():
-    user_msg = request.json["message"]
-    bot_msg = get_bot_reply(user_msg)
-    log_message(user_msg, bot_msg)
-    return jsonify({"reply": bot_msg})
+    data = request.get_json()
+    user_msg = data["message"]
+
+    bot_reply, sentiment = get_bot_reply(user_msg)
+
+    log_message(user_msg, bot_reply, sentiment)
+
+    return jsonify({"reply": bot_reply})
 
 if __name__ == "__main__":
     app.run(debug=True)

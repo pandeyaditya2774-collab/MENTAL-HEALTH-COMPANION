@@ -1,33 +1,36 @@
 from textblob import TextBlob
 import random
 
-responses = {
+emotion_responses = {
     "positive": [
-        "That's wonderful to hear! 😊",
-        "I'm glad you're feeling good!",
-        "You deserve this happiness 💛"
+        "That’s beautiful to hear 💛",
+        "I’m really glad you’re feeling that way 😊",
+        "You deserve that happiness 🌼"
     ],
     "negative": [
-        "I'm here for you. 💙",
-        "That sounds tough. Want to talk more?",
-        "You're not alone. I'm listening."
+        "I’m really sorry you’re feeling this way 💙",
+        "That sounds really hard… I’m here with you.",
+        "You’re not alone. Let’s take this one step at a time."
     ],
     "neutral": [
-        "I hear you 🌱",
-        "Thanks for sharing that.",
-        "Go on, I'm here."
+        "I hear you 🌿",
+        "Tell me a little more about that.",
+        "I’m listening."
     ]
 }
 
-def get_sentiment(text):
+def detect_sentiment(text):
     blob = TextBlob(text)
     polarity = blob.sentiment.polarity
+
     if polarity > 0.3:
         return "positive"
     elif polarity < -0.3:
         return "negative"
-    return "neutral"
+    else:
+        return "neutral"
 
 def get_bot_reply(user_input):
-    sentiment = get_sentiment(user_input)
-    return random.choice(responses[sentiment])
+    sentiment = detect_sentiment(user_input)
+    reply = random.choice(emotion_responses[sentiment])
+    return reply, sentiment

@@ -12,18 +12,21 @@ async function sendMessage() {
     userMsg.innerText = userText;
     chat.appendChild(userMsg);
 
-    // POST to Flask
-    const res = await fetch("/get_response", {
+    const response = await fetch("/get_response", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({message: userText})
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: userText })
     });
-    const data = await res.json();
+
+    const data = await response.json();
 
     const botMsg = document.createElement("div");
     botMsg.className = "bot-msg";
     botMsg.innerText = data.reply;
     chat.appendChild(botMsg);
+
     chat.scrollTop = chat.scrollHeight;
 }
 
