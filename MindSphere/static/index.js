@@ -1,24 +1,30 @@
-function sendMessage() {
+async function sendMessage() {
     const input = document.getElementById("userInput");
     const chat = document.getElementById("chat-box");
 
     if (!input.value.trim()) return;
 
+    const userText = input.value;
+    input.value = "";
+
     const userMsg = document.createElement("div");
     userMsg.className = "user-msg";
-    userMsg.innerText = input.value;
+    userMsg.innerText = userText;
     chat.appendChild(userMsg);
+
+    // POST to Flask
+    const res = await fetch("/get_response", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: userText})
+    });
+    const data = await res.json();
 
     const botMsg = document.createElement("div");
     botMsg.className = "bot-msg";
-    botMsg.innerText = "I hear you 🌱 Take your time";
-
-    setTimeout(() => {
-        chat.appendChild(botMsg);
-        chat.scrollTop = chat.scrollHeight;
-    }, 600);
-
-    input.value = "";
+    botMsg.innerText = data.reply;
+    chat.appendChild(botMsg);
+    chat.scrollTop = chat.scrollHeight;
 }
 
 function changeMood() {
